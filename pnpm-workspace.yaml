@@ -1,0 +1,4 @@
+enableGlobalVirtualStore: true
+allowBuilds:
+  esbuild: true
+  workerd: true
