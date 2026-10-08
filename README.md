@@ -1,12 +1,10 @@
-# @astrojs/cloudflare: `prismjs` missing from dependencies
+# Repro for `prismjs` missing from dependencies
 
 Minimal reproduction for `@astrojs/cloudflare` importing `prismjs` at runtime while only listing it in `devDependencies`.
 
 `dist/vite-plugin-prism.js` does `import components from 'prismjs/components.js'`. With pnpm's [global virtual store](https://pnpm.io/settings#enableglobalvirtualstore) enabled, the adapter is linked from the shared store outside the project, so Node can only resolve what the adapter declares. `prismjs` isn't declared, so loading the Astro config fails.
 
 ## Reproduce
-
-Requires pnpm 10.12+ (tested with 11.3.0) and Node 22.
 
 ```sh
 pnpm install
@@ -29,7 +27,7 @@ Declare the dependency on the adapter's behalf in `pnpm-workspace.yaml`:
 
 ```yaml
 packageExtensions:
-  '@astrojs/cloudflare':
+  "@astrojs/cloudflare":
     dependencies:
       prismjs: ^1.30.0
 ```
